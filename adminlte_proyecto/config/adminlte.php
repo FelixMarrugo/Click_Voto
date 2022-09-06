@@ -288,40 +288,41 @@ return [
             'can'  => 'manage-blog',
         ],
         [
-            'text'        => 'pages',
-            'url'         => 'admin/pages',
+            'text'        => 'Inicio',
+            'url'         => 'home',
             'icon'        => 'far fa-fw fa-file',
-            'label'       => 1,
-            'label_color' => 'success',
+            /*'label'       => 1,
+            'label_color' => 'success',*/
         ],
-        ['header' => 'TARJETONES'],
+        ['header' => 'CANDIDATOS'],
         [
-            'text' => 'profile',
+            'text' => 'Lista de Candidatos',
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
             'text' => 'Diseño de tarjetón',
-            'url'  => 'admin/settings',
+            'url'  => 'home',
             'icon' => 'fas fa-fw fa-user',
         ],
-        [
+        /*[
             'text' => 'change_password',
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-lock',
-        ],
+        ],*/
+        ['header' => 'RESULTADOS'],
         [
-            'text'    => 'multilevel',
+            'text'    => 'Categoria',
             'icon'    => 'fas fa-fw fa-share',
             'submenu' => [
                 [
-                    'text' => 'level_one',
+                    'text' => 'Docentes',
                     'url'  => '#',
                 ],
                 [
-                    'text'    => 'level_one',
+                    'text'    => 'Personeria',
                     'url'     => '#',
-                    'submenu' => [
+                    /*'submenu' => [
                         [
                             'text' => 'level_two',
                             'url'  => '#',
@@ -340,10 +341,14 @@ return [
                                 ],
                             ],
                         ],
-                    ],
+                    ],*/
                 ],
                 [
-                    'text' => 'level_one',
+                    'text' => 'Contraloria',
+                    'url'  => '#',
+                ],
+                [
+                    'text' => 'Representantes',
                     'url'  => '#',
                 ],
             ],
@@ -360,9 +365,9 @@ return [
             'url'        => '#',
         ],
         [
-            'text'       => 'information',
+            'text'       => 'About Us',
             'icon_color' => 'cyan',
-            'url'        => '#',
+            'url'        => 'about',
         ],
     ],
 
