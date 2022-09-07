@@ -2,29 +2,32 @@
     margin: auto;
     width: 80%;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
 .section-tarjeton{
-    margin: 10px;
-    width: 100%;
+    margin: 70px;
     display: flex;
+    position: relative;
     justify-content: center;
     align-content: center;
 }
 
 .tarjeton{
-    margin: 0 12px;
-    width: 50%;
+    width: 100%;
     display: flex;
     justify-content: center;
-    
+    align-items: center;    
     background-color: #f2f2f2;
     border-radius: 15px;
-    border: 2px solid gray;
-    box-shadow: -10px 10px 20px rgb(187, 187, 187);
+    border: 2px solid #9bbf63;
+    box-shadow: -10px 10px 20px #3f3d7386;
+    transition: 0.5s;
+}
+
+.tarjeton:hover{
+    transform: scale(1.1);
 }
 
 .contenido{
@@ -42,9 +45,17 @@
 
 .contenido:nth-child(1) img{
     vertical-align: middle;
-    width: 80%;
+    width: 100%;
     border-radius: 50%;
-    border:3px solid #3f3d73;
+    border:3px solid #9bbf63;
+    transition: 0.5s;
+    box-shadow: 0px 0px 0px 0px #9bbf63;
+}
+
+.contenido:nth-child(1) img:hover{
+    vertical-align: middle;
+    transform: scale(1.2);
+    box-shadow: 0px 0px 20px 0px #9bbf63;
 }
 
 .contenido:nth-child(1) > div{
@@ -57,7 +68,23 @@
     text-align: center;
 }
 
-@media screen and (max-width: 700px){
+@media screen and (min-width: 100px) and (max-width: 299px){
+    .tarjeton{
+        flex-direction: column;
+    }
+
+    *{
+        font-size: xx-small;
+    }
+}
+
+@media screen and (min-width: 300px) and (max-width: 700px){
+    .contenedor-tarjeton{
+        flex-direction: column;
+    }
+    .tarjeton{
+        flex-direction: column;
+    }
     .contenido{
         padding: 10px;
     }
@@ -66,6 +93,26 @@
     }
     .contenido:nth-child(1) img{
         width: 100%;
+    }
+
+}
+
+@media screen and (min-width: 1600px) and (max-width: 2200px){
+    .contenedor-tarjeton{
+        width: 1400px;
+    }
+    *{
+        font-size: x-large;
+    }
+}
+
+@media screen and (min-width: 2201px) {
+    .contenedor-tarjeton{
+        width: 2000px;
+    }
+
+    *{
+        font-size: xx-large;
     }
 }
 
@@ -76,4 +123,56 @@
 
 #No-tarjeton{
     font-weight: bold;
+}
+
+.tools{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 100%;
+    display: flex;
+    width: 0px;
+    z-index: -1;
+    overflow: hidden;
+    flex-direction: column;
+    justify-content: center;
+    background-color: gray;
+    opacity: 0.9;
+    color: white;
+    text-align: center;
+    transition: 0.3s;
+    transition-delay: 0.2s;
+    border-radius: 20px 20px 20px 20px;
+    border: 0px solid #3f3d73;
+}
+
+.section-tarjeton:hover .tools{
+    width: 130px;
+    border: 2px solid #3f3d73;
+}
+
+.tools-elements{
+    font-size: medium;
+}
+.tools > .tools-elements > ul{
+    list-style-type: none;
+    margin: auto;
+    padding: 7px;
+}
+.tools > .tools-elements > ul > li{
+    margin-left: -100px;
+    font-size: medium;
+    transition: 0.5s;
+}
+
+.tools > .tools-elements > ul > li:nth-child(1){
+    transition-delay: 0.2s;
+}
+
+.tools > .tools-elements > ul > li:nth-child(2){
+    transition-delay: 0.4s;
+}
+
+.section-tarjeton:hover > .tools > .tools-elements > ul > li{
+    margin-left: 20px;
 }

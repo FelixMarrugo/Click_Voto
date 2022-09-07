@@ -2,7 +2,7 @@ function generar(){
     let nombre = "EL MANDA CALLA";
     let nombres = document.querySelectorAll(".nombre");
     
-    let desc = "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Enim corporis saepe porro? Eos impedit, possimus repudiandae ipsa repellendus autem! Perspiciatis cupiditate blanditiis deleniti sed rerum alias saepe a fugiat possimus.";
+    let desc = "Lorem, ipsum dolor sit amet consectetur adipisicing elit.";
     let descripcion = document.querySelectorAll(".descripcion");
     
     for (let i = 0; i < nombres.length; i++) {
