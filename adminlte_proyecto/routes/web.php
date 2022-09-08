@@ -21,6 +21,10 @@ Route::get('about', function(){
     return view('about');
 })->name('aboutUS');
 
+Route::get('tarjeton', function(){
+    return view('tarjeton');
+});
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
