@@ -290,7 +290,7 @@ return [
         [
             'text'        => 'Inicio',
             'url'         => 'home',
-            'icon'        => 'far fa-fw fa-file',
+            'icon'        => 'fas fa fa-home',
             /*'label'       => 1,
             'label_color' => 'success',*/
         ],
@@ -302,8 +302,13 @@ return [
         ],
         [
             'text' => 'Diseño de tarjetón',
-            'url'  => 'home',
-            'icon' => 'fas fa-fw fa-user',
+            'url'  => 'tarjeton',
+            'icon' => 'far fa-address-card',
+        ],
+        [
+            'text' => 'Inscribir Candidato',
+            'url'  => '#',
+            'icon' => 'fas fa-edit',
         ],
         /*[
             'text' => 'change_password',

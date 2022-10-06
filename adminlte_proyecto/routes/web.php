@@ -13,18 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+//Rutas de Welcome
+Route::get('/', [App\Http\Controllers\WelcomeController::class, 'view_welcome'])->name('welcome');
 
-Route::get('about', function(){
-    return view('about');
-})->name('aboutUS');
+//Rutas para AboutUS
+Route::get('/about', [App\Http\Controllers\AboutUSController::class, 'view_aboutus']);
 
-Route::get('tarjeton', function(){
-    return view('tarjeton');
-});
+//Rutas para el tarjeton
+Route::get('tarjeton', [App\Http\Controllers\TarjetonController::class, 'view_design']);
 
+//Autenticacion
 Auth::routes();
 
+//Home
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

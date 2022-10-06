@@ -1,3 +1,4 @@
+alert('Estoy en el javascript');
 function generar(){
     let nombre = "EL MANDA CALLA";
     let nombres = document.querySelectorAll(".nombre");

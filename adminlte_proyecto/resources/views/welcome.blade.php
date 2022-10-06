@@ -71,7 +71,14 @@
         <div class="row">
             <div class="col">
                 <h1>...</h1>
+                <a class="btn btn-primary">Votante</a>
             </div>
+            <div class="col">
+                <a class="btn btn-info">
+                directivo
+                </a>
+            </div>
+               
         </div>
     </div>
 
