@@ -17,9 +17,12 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger("estudiante_id")->unique();
             $table->foreign("estudiante_id")->references("id")->on("estudiantes");
-            $table->unsignedBigInteger("cargo_id");
-            $table->unsignedBigInteger("tarjeton_id");
 
+            $table->unsignedBigInteger("cargo_id")->unique();
+            $table->foreign("cargo_id")->references("id")->on("cargo");
+
+            $table->unsignedBigInteger("tarjeton_id")->unique();
+            $table->foreign("tarjeton_id")->references("id")->on("tarjeton");
 
         });
     }

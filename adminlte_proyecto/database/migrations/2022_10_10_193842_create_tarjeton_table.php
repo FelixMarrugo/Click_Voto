@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('tarjeton', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->text("numero_tejeton");
         });
     }
 
