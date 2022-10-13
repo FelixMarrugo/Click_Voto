@@ -11,7 +11,7 @@ class Grado extends Model
 
     //Mucho a uno con instituciones
     public function instituciones(){
-        return $this->belongsTo(Institucion::class, 'institucion_id');
+        return $this->belongsTo(Institucion::class, 'institucions_id');
     }
 
     //Uno a muchos

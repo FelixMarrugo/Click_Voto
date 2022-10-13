@@ -293,6 +293,11 @@ return [
             'icon'        => 'fas fa fa-home',
             /*'label'       => 1,
             'label_color' => 'success',*/
+        ],['header' => 'ESTUDIATES'], //Estudiantes
+        [
+            'text' => 'Gestor de Estudiantes',
+            'url'  => 'estudiante',
+            'icon' => 'far fa-address-card',
         ],
         ['header' => 'CANDIDATOS'],
         [
@@ -307,7 +312,7 @@ return [
         ],
         [
             'text' => 'Inscribir Candidato',
-            'url'  => '#',
+            'url'  => 'inscribirCandidatos',
             'icon' => 'fas fa-edit',
         ],
         /*[

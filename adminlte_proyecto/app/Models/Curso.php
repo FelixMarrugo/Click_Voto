@@ -18,4 +18,5 @@ class Curso extends Model
     public function estudiantes(){
         return $this->hasMany(Estudiante::class, 'id');
     }
+
 }

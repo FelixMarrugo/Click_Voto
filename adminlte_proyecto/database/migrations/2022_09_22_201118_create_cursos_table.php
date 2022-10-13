@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('cursos', function (Blueprint $table) {
             $table->id();
             $table->String('numero_curso');
-            $table->unsignedBigInteger('grado_id');
-            $table->foreign('grado_id')->references('id')->on('grado');
+            $table->unsignedBigInteger('grados_id');
+            $table->foreign('grados_id')->references('id')->on('grados');
         });
     }
 

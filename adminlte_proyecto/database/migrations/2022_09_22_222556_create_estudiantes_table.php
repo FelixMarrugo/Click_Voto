@@ -15,12 +15,14 @@ return new class extends Migration
     {
         Schema::create('estudiantes', function (Blueprint $table) {
             $table->id();
-            $table->String('identicacion');
+            $table->String('identificacion');
             $table->String('nombre');
             $table->String('apellido');
             $table->unsignedBigInteger('cursos_id');
             $table->String('estado');
             $table->foreign('cursos_id')->references('id')->on('cursos');
+            
+            $table->timestamps();
         });
     }
 

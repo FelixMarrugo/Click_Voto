@@ -27,3 +27,11 @@ Auth::routes();
 
 //Home
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Inscripcion de candidatos
+Route::get('inscribirCandidatos', [App\Http\Controllers\InscribirCandidatoController::class, 'view_inscribirCandidato'])->name('inscribirCandidatos');
+
+//Estudiantes
+Route::get('estudiante', [App\Http\Controllers\Estudiantes::class, 'view_Estudiante'])->name('estudiante');
+
+Route::post('estudiante', [App\Http\Controllers\Estudiantes::class, 'guardar_estudiantes'])->name('guardar_estudiantes');
