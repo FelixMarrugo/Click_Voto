@@ -6,11 +6,14 @@ use Illuminate\Http\Request;
 use App\Models\Estudiante;
 class Estudiantes extends Controller
 {
+    
     //Retornar vista
     public function view_Estudiante(){
         $curso = new Cursos;
         $lista_cursos = $curso->todos();
-        return view("estudiante", compact('lista_cursos'));
+        $estudiante =$this->todos();
+
+        return view("estudiante", compact('lista_cursos', 'estudiante'));
     }
 
     public function guardar_estudiantes(Request $request){
@@ -28,5 +31,10 @@ class Estudiantes extends Controller
         
         $estudiante->save();
         return redirect()->route('estudiante')->with('mensaje', 'Estudiante Guadado correctamente');
+    }
+
+    public function todos(){
+        $estudiante = Estudiante::all();
+        return $estudiante;
     }
 }

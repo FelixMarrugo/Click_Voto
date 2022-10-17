@@ -16,6 +16,6 @@ class Grado extends Model
 
     //Uno a muchos
     public function cursos(){
-        return $this->hasMany(Grado::class, 'id');
+        return $this->hasMany(Curso::class, 'id');
     }
 }

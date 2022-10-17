@@ -11,6 +11,10 @@ class Estudiante extends Model
 
     //Relacion con la tabla estudiante
     public function cursos(){
-        return $this->belongsTo(Curso::class, 'curso_id');
+        return $this->belongsTo(Curso::class, 'cursos_id');
+    }
+
+    public function candidatos(){
+        return $this->hasOne(candidatos::class, 'id');
     }
 }

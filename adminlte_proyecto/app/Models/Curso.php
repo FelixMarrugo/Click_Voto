@@ -11,7 +11,7 @@ class Curso extends Model
 
     //muchos a uno con la tabla grados
     public function grados(){
-        return $this->belongsTo(Curso::class, 'grado_id');
+        return $this->belongsTo(Grado::class, 'grados_id');
     }
 
     //Relacion con la tabla estudiantes.

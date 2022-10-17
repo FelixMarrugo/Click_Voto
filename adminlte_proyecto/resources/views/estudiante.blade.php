@@ -17,7 +17,8 @@
                 <div class="card-header d-flex p-0">
                     <h3 class="card-title p-3">Tabs</h3>
                     <ul class="nav nav-pills ml-auto p-2">
-                        <li class="nav-item"><a class="nav-link active" href="#tab_1" data-toggle="tab"><i class='fas fa-plus'></i> Registrar
+                        <li class="nav-item"><a class="nav-link active" href="#tab_1" data-toggle="tab"><i
+                                    class='fas fa-plus'></i> Registrar
                                 Estudiantes</a></li>
                         <li class="nav-item"><a class="nav-link" href="#tab_2" data-toggle="tab"> Editar</a></li>
                     </ul>
@@ -27,15 +28,19 @@
                         <div class="tab-pane active" id="tab_1">
                             <div class="row justify-content-center">
                                 <div class="col-6">
-                                    <form action="{{route('guardar_estudiantes')}}" method="POST" class="row g-3 shadow p-3 mb-5 bg-body rounded "><!--Form--> 
+                                    <form action="{{ route('guardar_estudiantes') }}" method="POST"
+                                        class="row g-3 shadow p-3 mb-5 bg-body rounded ">
+                                        <!--Form-->
                                         @csrf
                                         <div class="col-md-6 mb-3">
                                             <label for="" class="form-label">Nombre</label>
-                                            <input type="text" class="form-control" id="nombre" name="nombre" required>
+                                            <input type="text" class="form-control" id="nombre" name="nombre"
+                                                required>
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label for="" class="form-label">Apellido</label>
-                                            <input type="text" class="form-control" id="apellido" name="apellido" required>
+                                            <input type="text" class="form-control" id="apellido" name="apellido"
+                                                required>
                                         </div>
                                         <div class="col-6 mb-3">
                                             <label for="" class="form-label">Identificación</label>
@@ -45,11 +50,12 @@
 
                                         <div class="col-6 form-group mb-3">
                                             <label>Grado</label>
-                                            <select id="curso" name = "curso" class="form-control select2" style="width: 100%;">
+                                            <select id="curso" name="curso" class="form-control select2"
+                                                style="width: 100%;">
 
-                                                <option id="curso" name = "curso">Elije una opcion</option>
+                                                <option id="curso" name="curso">Elije una opcion</option>
                                                 @foreach ($lista_cursos as $item)
-                                                    <option value="{{$item->id}}">{{ $item->numero_curso }}</option>
+                                                    <option value="{{ $item->id }}">{{ $item->numero_curso }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -70,13 +76,44 @@
                         </div>
                         <!-- /.tab-pane -->
                         <div class="tab-pane" id="tab_2">
-                            The European languages are members of the same family. Their separate existence is a myth.
-                            For science, music, sport, etc, Europe uses the same vocabulary. The languages only differ
-                            in their grammar, their pronunciation and their most common words. Everyone realizes why a
-                            new common language would be desirable: one could refuse to pay expensive translators. To
-                            achieve this, it would be necessary to have uniform grammar, pronunciation and more common
-                            words. If several languages coalesce, the grammar of the resulting language is more simple
-                            and regular than that of the individual languages.
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="card-title">DataTable with default features</h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body">
+                                    <table id="estudiantes" class="table table-bordered table-striped text-center">
+                                        <thead>
+                                            <tr>
+                                                <th>identificacion</th>
+                                                <th>Nombre</th>
+                                                <th>Apellido(s)</th>
+                                                <th>Curso</th>
+                                                <th>Estado</th>
+                                                <th>Editar</th>
+                                                <th>Incribir como candidato</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($estudiante as $item)
+                                                <tr>
+                                                    <td>{{$item->identificacion}}</td>
+                                                    <td>{{$item->nombre}}</td>
+                                                    <td>{{$item->apellido}}</td>
+                                                    <td>{{$item->cursos->numero_curso}}</td>
+                                                    <td>{{$item->estado}}</td>
+                                                    <td><button class="btn btn-info">editar</button></td>
+                                                    <td><button class="btn btn-warning btn-sm">¿Candidato?</button></td>
+                                                </tr>
+                                            @endforeach
+                                            
+                                        
+                                        </tbody>
+                                        
+                                    </table>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
                         </div>
                         <!-- /.tab-pane -->
                     </div>
@@ -89,15 +126,19 @@
     </div>
     <!-- /.row -->
     <!-- END CUSTOM TABS -->
-
+   
 @stop
 
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
 @stop
 
 @section('js')
-    <script>
-        console.log('Hi!');
-    </script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+<script>
+    $('#estudiantes').DataTable();
+</script>
 @stop
