@@ -19,10 +19,10 @@ return new class extends Migration
             $table->foreign("estudiante_id")->references("id")->on("estudiantes");
 
             $table->unsignedBigInteger("cargo_id")->unique();
-            $table->foreign("cargo_id")->references("id")->on("cargo");
+            $table->foreign("cargo_id")->references("id")->on("cargos");
 
-            $table->unsignedBigInteger("tarjeton_id")->unique();
-            $table->foreign("tarjeton_id")->references("id")->on("tarjeton");
+            $table->unsignedBigInteger("tarjeton_id");
+            $table->foreign("tarjeton_id")->references("id")->on("tarjetons");
 
         });
     }

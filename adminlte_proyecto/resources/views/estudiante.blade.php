@@ -7,7 +7,26 @@
 
 @stop
 
+
 @section('content')
+    @if (session('mensaje'))
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-success  alert-dismissible fade show" role="alert">
+                    <strong>¡Excelente!</strong> {{ session('mensaje') }}
+                </div>
+            </div>
+        </div>
+    @endif
+    @if (session('candidato'))
+    <div class="row">
+        <div class="col">
+            <div class="alert alert-danger  alert-dismissible fade show" role="alert">
+                <strong>Lo sentimos </strong> {{ session('candidato') }}
+            </div>
+        </div>
+    </div>
+@endif
     <h5 class="mt-4 mb-2">Tabs in Cards</h5>
 
     <div class="row">
@@ -18,18 +37,71 @@
                     <h3 class="card-title p-3">Tabs</h3>
                     <ul class="nav nav-pills ml-auto p-2">
                         <li class="nav-item"><a class="nav-link active" href="#tab_1" data-toggle="tab"><i
-                                    class='fas fa-plus'></i> Registrar
-                                Estudiantes</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#tab_2" data-toggle="tab"> Editar</a></li>
+                                    class='fas fa-plus'></i> Inscribir Candidatos </a></li>
+                        <li class="nav-item"><a class="nav-link" href="#tab_2" data-toggle="tab"> Registrar
+                                Estudiantes</a>
+                        </li>
                     </ul>
                 </div><!-- /.card-header -->
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="tab-pane active" id="tab_1">
+                            <div class="row ">
+                                <div class="col">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h3 class="card-title">DataTable with default features</h3>
+                                        </div>
+                                        <!-- /.card-header -->
+                                        <div class="card-body">
+                                            <table id="estudiantes" class="table table-bordered table-striped text-center">
+                                                <thead>
+                                                    <tr>
+                                                        <th>identificacion</th>
+                                                        <th>Nombre</th>
+                                                        <th>Apellido(s)</th>
+                                                        <th>Curso</th>
+                                                        <th>Estado</th>
+                                                        <th>Editar</th>
+                                                        <th>Incribir como candidato</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach ($estudiante as $item)
+                                                        <tr>
+                                                            <td>{{ $item->identificacion }}</td>
+                                                            <td>{{ $item->nombre }}</td>
+                                                            <td>{{ $item->apellido }}</td>
+                                                            <td>{{ $item->cursos->numero_curso }}</td>
+                                                            <td>{{ $item->estado }}</td>
+                                                            <td><button class="btn btn-info">editar</button></td>
+                                                            <td><a class="btn btn-warning btn-sm verificar-curso"
+                                                                    @if ($item->cursos->numero_curso != 'Pre-escolar-01' and
+                                                                        $item->cursos->numero_curso != 'Pre-escolar-02' and
+                                                                        $item->cursos->numero_curso != 'Pre-escolar-03' and
+                                                                        $item->cursos->numero_curso != '1-01' and
+                                                                        $item->cursos->numero_curso != '1-02' and
+                                                                        $item->cursos->numero_curso != '2-01' and
+                                                                        $item->cursos->numero_curso != '2-02') href="{{ route('inscribirCandidatos', $item->id) }}">¿Candidato?</a> @endif
+                                                                    </td>
+                                                        </tr>
+                                                    @endforeach
+
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+                                        <!-- /.card-body -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.tab-pane -->
+                        <div class="tab-pane" id="tab_2">
                             <div class="row justify-content-center">
                                 <div class="col-6">
                                     <form action="{{ route('guardar_estudiantes') }}" method="POST"
-                                        class="row g-3 shadow p-3 mb-5 bg-body rounded ">
+                                        class="row g-3 shadow p-3 mb-5 bg-body rounded " style="margin-top: 25px">
                                         <!--Form-->
                                         @csrf
                                         <div class="col-md-6 mb-3">
@@ -45,7 +117,7 @@
                                         <div class="col-6 mb-3">
                                             <label for="" class="form-label">Identificación</label>
                                             <input type="text" class="form-control" name="identificacion"
-                                                id="identificacion" placeholder="12345">
+                                                id="identificacion" placeholder="12345" required>
                                         </div>
 
                                         <div class="col-6 form-group mb-3">
@@ -68,52 +140,15 @@
                                         </div>
 
                                         <div class="col-12 mb-3">
-                                            <button type="submit" class="btn btn-primary">Guardar</button>
+                                            <button type="submit" class="btn btn-primary"
+                                                >Guardar</button>
                                         </div>
                                     </form>
                                 </div>
                             </div>
-                        </div>
-                        <!-- /.tab-pane -->
-                        <div class="tab-pane" id="tab_2">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h3 class="card-title">DataTable with default features</h3>
-                                </div>
-                                <!-- /.card-header -->
-                                <div class="card-body">
-                                    <table id="estudiantes" class="table table-bordered table-striped text-center">
-                                        <thead>
-                                            <tr>
-                                                <th>identificacion</th>
-                                                <th>Nombre</th>
-                                                <th>Apellido(s)</th>
-                                                <th>Curso</th>
-                                                <th>Estado</th>
-                                                <th>Editar</th>
-                                                <th>Incribir como candidato</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($estudiante as $item)
-                                                <tr>
-                                                    <td>{{$item->identificacion}}</td>
-                                                    <td>{{$item->nombre}}</td>
-                                                    <td>{{$item->apellido}}</td>
-                                                    <td>{{$item->cursos->numero_curso}}</td>
-                                                    <td>{{$item->estado}}</td>
-                                                    <td><button class="btn btn-info">editar</button></td>
-                                                    <td><button class="btn btn-warning btn-sm">¿Candidato?</button></td>
-                                                </tr>
-                                            @endforeach
-                                            
-                                        
-                                        </tbody>
-                                        
-                                    </table>
-                                </div>
-                                <!-- /.card-body -->
-                            </div>
+
+
+
                         </div>
                         <!-- /.tab-pane -->
                     </div>
@@ -126,7 +161,7 @@
     </div>
     <!-- /.row -->
     <!-- END CUSTOM TABS -->
-   
+
 @stop
 
 @section('css')
@@ -136,9 +171,15 @@
 @stop
 
 @section('js')
-<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
-<script>
-    $('#estudiantes').DataTable();
-</script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+        $('#estudiantes').DataTable();
+    </script>
+
+    <script>
+        
+
+        
+    </script>
 @stop

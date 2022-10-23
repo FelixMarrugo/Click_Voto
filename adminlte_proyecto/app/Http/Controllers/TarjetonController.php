@@ -12,5 +12,9 @@ class TarjetonController extends Controller
     public function view_design(){
         return view('tarjeton');
     }
+
+    public function asignar_tarjeton(){
+        
+    }
 }
 

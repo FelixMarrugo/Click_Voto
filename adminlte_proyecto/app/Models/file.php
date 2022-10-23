@@ -5,11 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Tarjeton extends Model
+class file extends Model
 {
     use HasFactory;
 
-    public function candidatos(){
-        return this->hasMany(candidato::class, 'id');
-    }
+    protected $fillable = ['url'];
 }

@@ -13,4 +13,12 @@ class Candidato extends Model
     public function estudiantes(){
         return $this->belongsTo(Estudiante::class, 'estudiante_id');
     }
+
+    public function tarjetones(){
+        return $this->belongsTo(Tarjeton::class, 'tarjeton_id');
+    }
+
+    public function cargos(){
+        return $this->belongsTo(Cargo::class, 'cargo_id');
+    }
 }

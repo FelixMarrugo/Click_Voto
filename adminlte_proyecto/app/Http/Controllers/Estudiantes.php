@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Estudiante;
 class Estudiantes extends Controller
-{
-    
+{  
     //Retornar vista
     public function view_Estudiante(){
         $curso = new Cursos;
@@ -37,4 +36,10 @@ class Estudiantes extends Controller
         $estudiante = Estudiante::all();
         return $estudiante;
     }
+
+    public function estudiante($id){
+        $estudiante = Estudiante::FindOrFail($id);
+        return $estudiante;
+    }
+
 }

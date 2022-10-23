@@ -29,9 +29,12 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Inscripcion de candidatos
-Route::get('inscribirCandidatos', [App\Http\Controllers\InscribirCandidatoController::class, 'view_inscribirCandidato'])->name('inscribirCandidatos');
+Route::get('inscribirCandidatos/{id}', [App\Http\Controllers\InscribirCandidatoController::class, 'view_inscribirCandidato'])->name('inscribirCandidatos');
 
 //Estudiantes
 Route::get('estudiante', [App\Http\Controllers\Estudiantes::class, 'view_Estudiante'])->name('estudiante');
 
 Route::post('estudiante', [App\Http\Controllers\Estudiantes::class, 'guardar_estudiantes'])->name('guardar_estudiantes');
+
+//Guardar Imagenes
+Route::post('store{id}', [App\Http\Controllers\FileControllers::class, 'store_file'])->name('store_file');

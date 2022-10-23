@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('cargo', function (Blueprint $table) {
+        Schema::create('tarjetons', function (Blueprint $table) {
             $table->id();
-            $table->text("nombre_cargo");
+            $table->text("numero_tejeton");
         });
     }
 
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cargo');
+        Schema::dropIfExists('tarjetons');
     }
 };

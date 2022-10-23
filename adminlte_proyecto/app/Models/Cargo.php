@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Cargo extends Model
 {
     use HasFactory;
+
+    public function candidatos(){
+        return this->hasMany(candidato::class, 'id');
+    }
 }
