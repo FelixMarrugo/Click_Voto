@@ -14,4 +14,9 @@ class CargoController extends Controller
         return $curso;
     }
 
+    public function todos_cargos(){
+        $cargo = Cargo::all(); 
+        return $cargo;
+    }
+
 }

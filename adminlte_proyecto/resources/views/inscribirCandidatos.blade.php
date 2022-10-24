@@ -79,10 +79,11 @@
 
                                 <label>Cargo</label>
                                 <select id="curso" name="curso" class="form-control select2" style="width: 100%;">
-                                   
-                                        <option id="curso" name="curso">{{ $cargo }}</option>
-                                    
-
+                                    @foreach ($cargo_estudiante as $item)
+                                         <option id="curso" name="curso" values = "">{{$item->nombre_cargo}}</option>
+                                    @endforeach
+                                       
+                                
                                 </select>
 
                             </div>
