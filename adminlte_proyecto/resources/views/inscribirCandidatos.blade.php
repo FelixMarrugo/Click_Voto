@@ -79,11 +79,14 @@
 
                                 <label>Cargo</label>
                                 <select id="curso" name="curso" class="form-control select2" style="width: 100%;">
-                                    @foreach ($cargo_estudiante as $item)
-                                         <option id="curso" name="curso" values = "">{{$item->nombre_cargo}}</option>
-                                    @endforeach
-                                       
-                                
+                                    
+                                        
+                                            <option id="curso" name="curso" values="">{{ $cargo_estudiante_representante->nombre_cargo}}</option>
+                                     
+                                  
+
+
+
                                 </select>
 
                             </div>
@@ -126,5 +129,5 @@
     <script>
         < script src = "//cdn.jsdelivr.net/npm/sweetalert2@11" >
     </script>
-    
+
 @stop

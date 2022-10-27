@@ -9,9 +9,9 @@ class CargoController extends Controller
 {
     //Enviar Cargo a la vista Inscribir candidatos
     public function cargo_estudiante($id){
-        $estudiante = Estudiante::FinfOrFail($id);
-        $curso = $estudiante->cursos->numero_curso;
-        return $curso;
+        $cargo = Cargo::FindOrFail($id);
+        //$cargo_estudiante = $cargo->nombre_cargo;
+        return $cargo;
     }
 
     public function todos_cargos(){

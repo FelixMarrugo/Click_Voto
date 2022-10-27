@@ -17,11 +17,14 @@ class InscribirCandidatoController extends Controller
         $estudiante = new Estudiantes;
         $info = $estudiante->estudiante($id);
 
+        $grado = new GradoController;
+        $numero_grado = $grado->gradoById($id);
+        
         $curso = new Cursos;
         $curso_estudiante = $curso->curso_estudiante($id);
-
+        
         $cargo = new CargoController;
-        $cargo_estudiante = $cargo->todos_cargos();
+        //$cargo_estudiante = $cargo->todos_cargos();
 
         $can = Candidato::select(['estudiante_id'])->where('estudiante_id', $id)->get();
         
@@ -31,11 +34,16 @@ class InscribirCandidatoController extends Controller
 
         }else{
 
-            /*if($curso_estudiante = "11-01"){
-                $cardo = array("Representante", "Personero");
-            }*/
-            return view('inscribirCandidatos', compact('info', 'cargo_estudiante'));
+            if($numero_grado != "11" and $numero_grado != "10"){
+                $cargo_estudiante_representante = $cargo->cargo_estudiante(1);
+              // return $cargo_estudiante->id;
+               return view('inscribirCandidatos', compact('info', 'cargo_estudiante_representante'));
+            }else{
+                
+                return "<h1> estamos trabajando..!</h1>";
+            }
 
+            
 
         }
           

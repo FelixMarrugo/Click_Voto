@@ -11,7 +11,6 @@ class Estudiantes extends Controller
         $curso = new Cursos;
         $lista_cursos = $curso->todos();
         $estudiante =$this->todos();
-
         return view("estudiante", compact('lista_cursos', 'estudiante'));
     }
 
