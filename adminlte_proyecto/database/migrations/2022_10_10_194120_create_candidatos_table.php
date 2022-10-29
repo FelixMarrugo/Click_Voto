@@ -24,6 +24,11 @@ return new class extends Migration
             $table->unsignedBigInteger("tarjeton_id");
             $table->foreign("tarjeton_id")->references("id")->on("tarjetons");
 
+            $table->timestamps();
+
+            //Faltan los atributos de tiempo
+            //Realizar un backup de la base dedatos tabla a tabla
+
         });
     }
 

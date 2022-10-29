@@ -31,6 +31,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // Inscripcion de candidatos
 Route::get('inscribirCandidatos/{id}', [App\Http\Controllers\InscribirCandidatoController::class, 'view_inscribirCandidato'])->name('inscribirCandidatos');
 
+Route::post('inscribir', [App\Http\Controllers\InscribirCandidatoController::class, 'inscribirCandidatoEstudiante'])->name('CandidatoEstudiante');
+
 //Estudiantes
 Route::get('estudiante', [App\Http\Controllers\Estudiantes::class, 'view_Estudiante'])->name('estudiante');
 

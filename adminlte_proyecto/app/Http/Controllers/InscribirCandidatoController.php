@@ -39,18 +39,45 @@ class InscribirCandidatoController extends Controller
               // return $cargo_estudiante->id;
                return view('inscribirCandidatos', compact('info', 'cargo_estudiante_representante'));
             }else{
-                
-                return "<h1> estamos trabajando..!</h1>";
+                if($numero_grado == "11"){
+                    $cargo_estudiante_representante1 = $cargo->cargo_estudiante(1);
+                    $cargo_estudiante_representante2 = $cargo->cargo_estudiante(2);
+                    //return $cargo_estudiante_representante2->id;
+                    
+                }else{
+                    $cargo_estudiante_representante1 = $cargo->cargo_estudiante(1);
+                    $cargo_estudiante_representante2 = $cargo->cargo_estudiante(3);
+                    //return view('inscribirCandidatos', compact('info', 'cargo_estudiante_representante1', 'cargo_estudiante_representante2'));
+                }
+                return view('inscribirCandidatos', compact('info', 'cargo_estudiante_representante1', 'cargo_estudiante_representante2'));
             }
-
-            
 
         }
           
-        
     }
 
-    public function inscribirCandidatoEstudiante($estudiante_id, $cargo_id, $tarjeton_id){
-        //
+    public function inscribirCandidatoEstudiante(Request $request){
+        //Asignar tarjeton
+        $estudiante = new Estudiantes;
+        $id = $request->input('id');
+        $est = $estudiante->estudiante($request->input('id'));
+        $cargo = $request->get('cargo');
+        $numero_grado = $est->cursos->grados->numero_grado;
+
+        $tarjeton = new TarjetonController;
+        $tarjeton_id = $tarjeton->asignar_tarjeton($numero_grado, $cargo);
+        $this->guardar_candidato($id, $cargo, $tarjeton_id);
+        return "Exitooooooo";
+    }
+
+    public function guardar_candidato($id, $cargo, $tarjeton_id){
+        //Guardar candidato
+       $candidato = new Candidato;
+       $candidato->estudiante_id = $id;
+       $candidato->cargo_id = $cargo;
+       $candidato->tarjeton_id = $tarjeton_id;
+       $candidato->save();
+
+       //Colocarle los atributos de tiempo en la migracion de los candidatos
     }
 }
