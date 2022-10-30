@@ -19,4 +19,8 @@ class Curso extends Model
         return $this->hasMany(Estudiante::class, 'id');
     }
 
+    public function votos(){
+        return this->hasMany(votoEstudiante::class, 'id');
+    }
+
 }

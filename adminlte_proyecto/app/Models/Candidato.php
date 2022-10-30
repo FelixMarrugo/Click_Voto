@@ -21,4 +21,8 @@ class Candidato extends Model
     public function cargos(){
         return $this->belongsTo(Cargo::class, 'cargo_id');
     }
+
+    public function votos(){
+        return this->hasMany(VotoEstudiante::class, 'id');
+    }
 }

@@ -9,7 +9,9 @@
 @section('content')
     <div class="container">
         <div class="card card-primary card-outline">
-            <div class="card-header"><h4 class="text-center">Inscripción de candidatos</h4></div>
+            <div class="card-header">
+                <h4 class="text-center">Inscripción de candidatos</h4>
+            </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col">
@@ -47,13 +49,14 @@
                                 <h3 class="text-center">
                                     Informacion del Candidato
                                 </h3>
-                                <form action="{{route('CandidatoEstudiante')}}" class="row g-3  " style="margin-top: 25px" method="POST">
+                                <form action="{{ route('CandidatoEstudiante') }}" class="row g-3  guardar"
+                                    style="margin-top: 25px" method="POST">
                                     <!--Form-->
                                     @csrf
                                     <div class="col-md-12 mb-3">
-                                        
-                                        <input type="hidden" class="form-control text-center" style="width: 50px" id="id" name="id"
-                                            value="{{ $info->id }}">
+
+                                        <input type="hidden" class="form-control text-center" style="width: 50px"
+                                            id="id" name="id" value="{{ $info->id }}">
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label for="" class="form-label">Nombre</label>
@@ -90,12 +93,12 @@
                                         <select id="cargo" name="cargo" class="form-control select2"
                                             style="width: 100%;">
                                             @if (isset($cargo_estudiante_representante))
-                                                <option value="{{$cargo_estudiante_representante->id}}">
+                                                <option value="{{ $cargo_estudiante_representante->id }}">
                                                     {{ $cargo_estudiante_representante->nombre_cargo }}</option>
                                             @else
-                                                <option  value="{{$cargo_estudiante_representante1->id}}">
+                                                <option value="{{ $cargo_estudiante_representante1->id }}">
                                                     {{ $cargo_estudiante_representante1->nombre_cargo }}</option>
-                                                <option value="{{$cargo_estudiante_representante2->id}}">
+                                                <option value="{{ $cargo_estudiante_representante2->id }}">
                                                     {{ $cargo_estudiante_representante2->nombre_cargo }}</option>
                                             @endif
 
@@ -104,7 +107,8 @@
 
                                     </div>
                                     <div class="col-6">
-                                        <button type="submit" class="btn btn-primary" name = "inscribir" id="inscribir">Inscribir</button>
+                                        <button type="submit" class="btn btn-primary" name="inscribir"
+                                            id="inscribir">Inscribir</button>
                                     </div>
 
                                 </form>
@@ -144,7 +148,22 @@
 
 @section('js')
     <script>
-        < script src = "//cdn.jsdelivr.net/npm/sweetalert2@11" >
+        $('.guardar').submit(function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: '¿Estas seguro de inscribir?',
+                text: "El candidato se guardara automaticamente en la base de datos",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, inscribir'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.submit();
+                }
+            })
+        });
     </script>
 
 @stop

@@ -12,7 +12,6 @@
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 
-
     </head>
     
     <body class="">
@@ -45,25 +44,42 @@
             </div>
           </nav>
 
-    <div class="container" style="margin-top: 50px; ">
-      
+    <div class="container" style="margin-top: 15px">
+
         <!--Cuerpo de la pagina bienvenidos-->
-        <div class="container text-center">
-          <div class="row align-items-center">
-            <div class="col" >
-               <img src="../../public/storage/img_inicio/click_voto.jpg" alt="">
+        
+        <div class="row">
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="display-3">Click Voto</h3>
+                    </div>
+                    <div class="card-body">
+                        Este es un gestor de votaciones escolares
+                    </div>
+                </div>
             </div>
-            <div class="col">
-              <h2>Click Voto</h2>
-                <p style="text-align: justify;">Bienvenidos Estudiantes y docentes, les presentamos el proyecto Click Voto, 
-                    que busca simplificar y optimizar el proceso de votacion escolar para las instituciones
-                    educativas, votar nunca fue tan facil como lo es hoy con click voto :D
-                </p>
-                <a href="{{route('votar_estudiante')}}" target="_blank" class="btn btn-primary">Click para votar</a>
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h6 class="display-6"> Votar es facil</h6>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
 
+        <div class="row">
+            <div class="col">
+                <h1>...</h1>
+                <a class="btn btn-primary">Votante</a>
+            </div>
+            <div class="col">
+                <a class="btn btn-info">
+                directivo
+                </a>
+            </div>
+               
+        </div>
     </div>
 
     </body>

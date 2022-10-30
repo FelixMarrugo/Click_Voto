@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Gestor de Estudiantes</h1>
+    <h1 class="display-1">Gestor de Estudiantes</h1>
 
 @stop
 
@@ -19,15 +19,24 @@
         </div>
     @endif
     @if (session('candidato'))
-    <div class="row">
-        <div class="col">
-            <div class="alert alert-danger  alert-dismissible fade show" role="alert">
-                <strong>Lo sentimos </strong> {{ session('candidato') }}
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-danger  alert-dismissible fade show" role="alert">
+                    <strong>Lo sentimos </strong> {{ session('candidato') }}
+                </div>
             </div>
         </div>
-    </div>
-@endif
-    <h5 class="mt-4 mb-2">Tabs in Cards</h5>
+    @endif
+    @if (session('candidato_null'))
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-danger  alert-dismissible fade show" role="alert">
+                    <strong> ¡Lo sentimos! </strong> {{ session('candidato_null') }}
+                </div>
+            </div>
+        </div>
+    @endif
+    <h5 class="mt-4 mb-2">Base de datos de estudiantes</h5>
 
     <div class="row">
         <div class="col-12">
@@ -101,7 +110,8 @@
                             <div class="row justify-content-center">
                                 <div class="col-6">
                                     <form action="{{ route('guardar_estudiantes') }}" method="POST"
-                                        class="row g-3 shadow p-3 mb-5 bg-body rounded " style="margin-top: 25px">
+                                        class="row g-3 shadow p-3 mb-5 bg-body rounded guardar_estudiante"
+                                        style="margin-top: 25px">
                                         <!--Form-->
                                         @csrf
                                         <div class="col-md-6 mb-3">
@@ -125,7 +135,8 @@
                                             <select id="curso" name="curso" class="form-control select2"
                                                 style="width: 100%;">
 
-                                                <option id="curso" name="curso">Elije una opcion</option>
+                                                <option value="0" id="curso" name="curso">Elije una opcion
+                                                </option>
                                                 @foreach ($lista_cursos as $item)
                                                     <option value="{{ $item->id }}">{{ $item->numero_curso }}</option>
                                                 @endforeach
@@ -140,8 +151,7 @@
                                         </div>
 
                                         <div class="col-12 mb-3">
-                                            <button type="submit" class="btn btn-primary"
-                                                >Guardar</button>
+                                            <button type="submit" class="btn btn-primary">Guardar</button>
                                         </div>
                                     </form>
                                 </div>
@@ -177,9 +187,28 @@
         $('#estudiantes').DataTable();
     </script>
 
+    @if (session('candidato_inscrito') == 'ok')
+        <script>
+            Swal.fire(
+                '¡Inscrito!',
+                '¡El candidaro se inscribio correctamente!',
+                'success'
+            )
+        </script>
+    @endif
     <script>
-        
+        $('.guardar_estudiante').submit(function(e) {
+            e.preventDefault();
 
-        
+            let identificacion = document.getElementById("identificacion").value;
+            if (isNaN(identificacion)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: '¡La identificacion tiene que ser un numero!'
+                })
+            }
+        })
     </script>
+
 @stop

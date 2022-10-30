@@ -28,11 +28,12 @@ Auth::routes();
 //Home
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// Inscripcion de candidatos
-Route::get('inscribirCandidatos/{id}', [App\Http\Controllers\InscribirCandidatoController::class, 'view_inscribirCandidato'])->name('inscribirCandidatos');
+// candidatos
+Route::get('inscribirCandidatos/{id}', [App\Http\Controllers\CandidatoController::class, 'view_inscribirCandidato'])->name('inscribirCandidatos');
 
-Route::post('inscribir', [App\Http\Controllers\InscribirCandidatoController::class, 'inscribirCandidatoEstudiante'])->name('CandidatoEstudiante');
+Route::post('inscribir', [App\Http\Controllers\CandidatoController::class, 'inscribirCandidatoEstudiante'])->name('CandidatoEstudiante');
 
+Route::get('listaCandidatos', [App\Http\Controllers\CandidatoController::class, 'lista_candidatos'])->name('listaCandidatos');
 //Estudiantes
 Route::get('estudiante', [App\Http\Controllers\Estudiantes::class, 'view_Estudiante'])->name('estudiante');
 
@@ -40,3 +41,7 @@ Route::post('estudiante', [App\Http\Controllers\Estudiantes::class, 'guardar_est
 
 //Guardar Imagenes
 Route::post('store{id}', [App\Http\Controllers\FileControllers::class, 'store_file'])->name('store_file');
+//VotarEstudiante
+Route::get('votar', [App\Http\Controllers\VotarControllers::class, 'view_votar'])->name('votar_estudiante');
+
+Route::Post('votar', [App\Http\Controllers\VotarControllers::class, 'Validar'])->name('Registrar_Voto_Estudiante');

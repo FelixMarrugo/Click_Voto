@@ -8,7 +8,7 @@ use App\Models\Curso;
 use App\Models\Candidato;
 use App\Models\Cargo;
 
-class InscribirCandidatoController extends Controller
+class CandidatoController extends Controller
 {
     
     //Mostrar vista
@@ -26,15 +26,24 @@ class InscribirCandidatoController extends Controller
         $cargo = new CargoController;
         //$cargo_estudiante = $cargo->todos_cargos();
 
+        //Organizar mejor, asignar una nueva responsabilidad
         $can = Candidato::select(['estudiante_id'])->where('estudiante_id', $id)->get();
+       
         
+       //return $can[0]["estudiante_id"];
         if($can != '[]'){
-            
+  
             return redirect()->route('estudiante')->with('candidato', 'El candidato ya existe, seleccione otro');
 
         }else{
 
             if($numero_grado != "11" and $numero_grado != "10"){
+                $info_candidatos = $this->todos();
+                foreach ($info_candidatos as $value) {
+                    if($value->estudiantes->cursos->numero_curso == $curso_estudiante ){
+                         return redirect()->route('estudiante')->with('candidato_null', 'El curso ya tiene un Canditado');
+                    }
+                }
                 $cargo_estudiante_representante = $cargo->cargo_estudiante(1);
               // return $cargo_estudiante->id;
                return view('inscribirCandidatos', compact('info', 'cargo_estudiante_representante'));
@@ -63,11 +72,19 @@ class InscribirCandidatoController extends Controller
         $est = $estudiante->estudiante($request->input('id'));
         $cargo = $request->get('cargo');
         $numero_grado = $est->cursos->grados->numero_grado;
+        $numero_curso = $est->cursos->numero_curso;
+
+        $info_candidatos = $this->todos();
+        foreach ($info_candidatos as $value) {
+            if($value->estudiantes->cursos->numero_curso == $numero_curso and $cargo == $value->cargo_id){
+                    return redirect()->route('estudiante')->with('Candidato_null', 'El curso ya tiene un Canditado a este cargo');
+            }
+        }
 
         $tarjeton = new TarjetonController;
         $tarjeton_id = $tarjeton->asignar_tarjeton($numero_grado, $cargo);
         $this->guardar_candidato($id, $cargo, $tarjeton_id);
-        return "Exitooooooo";
+        return redirect()->route('estudiante')->with('candidato_inscrito', 'ok');
     }
 
     public function guardar_candidato($id, $cargo, $tarjeton_id){
@@ -77,7 +94,15 @@ class InscribirCandidatoController extends Controller
        $candidato->cargo_id = $cargo;
        $candidato->tarjeton_id = $tarjeton_id;
        $candidato->save();
+    }
 
-       //Colocarle los atributos de tiempo en la migracion de los candidatos
+    public function lista_candidatos(){
+        $candidato = $this->todos();
+        return view('listaCandidatos', compact('candidato'));
+    }
+
+    public function todos(){
+        $candidato = Candidato::all();
+        return $candidato;
     }
 }
