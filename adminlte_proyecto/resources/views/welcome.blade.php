@@ -33,9 +33,6 @@
                         @else
                             <a href="{{ route('login') }}" class="btn btn-warning" >Log in</a>
 
-                            @if (Route::has('register'))
-                                <a href="{{ route('register') }}" class="btn btn-dark">Register</a>
-                            @endif
                         @endauth
                 
                     @endif
@@ -51,7 +48,6 @@
         <div class="container text-center">
           <div class="row align-items-center">
             <div class="col" >
-               <img src="../../public/storage/img_inicio/click_voto.jpg" alt="">
             </div>
             <div class="col">
               <h2>Click Voto</h2>
@@ -60,6 +56,7 @@
                     educativas, votar nunca fue tan facil como lo es hoy con click voto :D
                 </p>
                 <a href="{{route('votar_estudiante')}}" target="_blank" class="btn btn-primary">Click para votar</a>
+                <a href="{{route('resultados')}}" class="btn btn-info">Resultados</a>
             </div>
           </div>
         </div>

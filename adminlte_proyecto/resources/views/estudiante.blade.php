@@ -197,18 +197,7 @@
         </script>
     @endif
     <script>
-        $('.guardar_estudiante').submit(function(e) {
-            e.preventDefault();
-
-            let identificacion = document.getElementById("identificacion").value;
-            if (isNaN(identificacion)) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: '¡La identificacion tiene que ser un numero!'
-                })
-            }
-        })
+        
     </script>
 
 @stop

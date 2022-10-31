@@ -105,4 +105,9 @@ class CandidatoController extends Controller
         $candidato = Candidato::all();
         return $candidato;
     }
+
+    public function getById($id){
+        $candidato = Candidato::findOrFail($id);
+        return $candidato;
+    }
 }

@@ -16,12 +16,12 @@
     <div class="container">
         <div class="row" style="height: 80vh;">
             <div class="card border-primary shadow p-3 mb-5 bg-body rounded" style="width: 25rem; margin: auto;">
-                <div class="card-header">
+                <div class="card-header border-primary">
                     <h1 class="display-5 text-center">Votar</h1>
                     <p class="text-center"><strong>Estudiante:</strong> ingresar Indentificación</p>
                 </div>
                 <div class="card-body text-center">
-                    <form action="{{route('Registrar_Voto_Estudiante')}}" class="votar" method="POST">
+                    <form action="{{route('validar')}}" class="votar" method="POST">
                         @csrf
                         <label for="" class="form-label ">Indentificación</label>
                         <input type="text" id="identificacion" name="identificacion" class="form-control mb-3"

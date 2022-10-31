@@ -26,7 +26,7 @@ class Estudiantes extends Controller
         }else{
             $estudiante->estado = $request->input('estado');
         }
-        
+        $estudiante->voto = "no";
         $estudiante->save();
         return redirect()->route('estudiante')->with('mensaje', 'Estudiante Guadado correctamente');
     }
@@ -39,6 +39,13 @@ class Estudiantes extends Controller
     public function estudiante($id){
         $estudiante = Estudiante::FindOrFail($id);
         return $estudiante;
+    }
+
+    public function voto($id){
+       // $estudiante = new Estudiante;
+        $estudiante = Estudiante::FindOrFail($id);
+        $estudiante->voto = "si";
+        $estudiante->save();
     }
 
 }
