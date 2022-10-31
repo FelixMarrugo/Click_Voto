@@ -15,14 +15,19 @@ class VotarControllers extends Controller
     public function validar(Request $request){
         $identificacion = $request->input('identificacion');
         if (!is_numeric($identificacion)){
-            return redirect()->route('Registrar_Voto_Estudiante')->with('mensaje', 'La identificacion no es numerica');
+            return redirect()->route('votar_estudiante')->with('mensaje', 'La identificacion no es numerica');
         }
 
         $info_votante = Estudiante::select(['id', 'identificacion'])->where('identificacion', $identificacion)->get();
         if($info_votante != '[]'){
             $id = $info_votante [0]['id'];
         }else{
-            return redirect()->route('Registrar_Voto_Estudiante')->with('mensaje', 'Esta indentificacion no esta registrada');
+            return redirect()->route('votar_estudiante')->with('mensaje', 'Esta indentificacion no esta registrada');
+        }
+
+        $validar_voto = Estudiante::select(['voto'])->where('voto', 'si')->where('identificacion', $identificacion)->get();
+        if( $validar_voto != '[]'){
+            return redirect()->route('votar_estudiante')->with('mensaje', 'Ya se encuentra registrado su voto');
         }
 
         $objestudiante = new Estudiantes;

@@ -14,37 +14,9 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col">
-                        <div class="card card-primary card-outline" style="max-width: 20rem; margin: auto;">
-
-                            <h4 class="text-center " style="margin-top: 25px;">Foto</h4>
-                            <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                                <div class="around">
-                                    <img src="https://i.pinimg.com/474x/d8/f4/ba/d8f4ba914ff362706312cae39ac5f530.jpg"
-                                        class="img-fluid" />
-                                    <a href="#!">
-                                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <form action="{{ route('store_file', $info->id) }}" style="margin-top: -15px;"
-                                    method="POST" enctype="multipart/form-data">
-                                    @csrf
-                                    <input type="file" class="form-control mb-3" id="customFile" name="file"
-                                        id="file" accept="image/*" />
-                                    @error('file')
-                                        <h6>{{ $message }}</h6>
-                                    @enderror
-                                    <div class="col-12 mb-3">
-                                        <button type="submit" class="btn btn-primary">Guardar</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+                    
                     <div class="col ">
-                        <div class="card card-primary card-outline" style=" margin: auto;">
+                        <div class="card card-primary card-outline" style=" margin: auto; width: 50%">
                             <div class="card-body">
                                 <h3 class="text-center">
                                     Informacion del Candidato

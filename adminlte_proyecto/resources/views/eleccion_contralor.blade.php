@@ -13,62 +13,48 @@
 
 <body>
     <div class="container">
-        <h1 class="display-1 text-center">Contraloria</h1>
+
         <div class="row">
-            @foreach ($candidatos as $item)
-                @if ($item->cargos->nombre_cargo == 'Contraloria')
-                    <div class="col-4">
-                        <div class="card border-primary" style="width: 18rem;">
-                            <img src="{{ asset('img/candidato1.jpg') }}" style="width: 18rem" class=""
-                                alt="..." s>
-                            <div class="card-body">
-                                <p class="card-text"><strong>Nombre: </strong>{{ $item->estudiantes->nombre }}
-                                    {{ $item->estudiantes->apellido }}</p>
-                                <p class="card-text"><strong>Curso: </strong>
-                                    {{ $item->estudiantes->cursos->numero_curso }}</p>
-                                <p class="card-text"><strong>Cargo: </strong> {{ $item->cargos->nombre_cargo }}</p>
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="display-1 text-center">Contraloria</h1>
+                </div>
+                <div class="card-body">
+                    @foreach ($candidatos as $item)
+                        @if ($item->cargos->nombre_cargo == 'Contraloria')
+                            <div class="col-4">
+                                <div class="card border-primary" style="width: 18rem;">
+                                    <img src="{{ asset('img/candidato3.jpg') }}" style="width: 18rem" class=""
+                                        alt="..." s>
+                                    <div class="card-body">
+                                        <p class="card-text"><strong>Nombre: </strong>{{ $item->estudiantes->nombre }}
+                                            {{ $item->estudiantes->apellido }}</p>
+                                        <p class="card-text"><strong>Curso: </strong>
+                                            {{ $item->estudiantes->cursos->numero_curso }}</p>
+                                        <p class="card-text"><strong>Cargo: </strong> {{ $item->cargos->nombre_cargo }}
+                                        </p>
 
-                                <form action="{{ route('votico') }}" method="POST">
-                                    @csrf
-                                    <input type="hidden" class="form-control text-center" style="width: 50px"
-                                        id="id" name="id" value="{{ $id }}">
-                                    <input type="hidden" class="form-control text-center" style="width: 50px"
-                                        id="candidato_id" name="candidato_id" value="{{ $item->id }}">
-                                    <input type="hidden" class="form-control text-center" style="width: 50px"
-                                        id="curso" name="curso" value="{{ $curso_id }}">
+                                        <form action="{{ route('votico') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" class="form-control text-center" style="width: 50px"
+                                                id="id" name="id" value="{{ $id }}">
+                                            <input type="hidden" class="form-control text-center" style="width: 50px"
+                                                id="candidato_id" name="candidato_id" value="{{ $item->id }}">
+                                            <input type="hidden" class="form-control text-center" style="width: 50px"
+                                                id="curso" name="curso" value="{{ $curso_id }}">
 
-                                    <button type="submit" class="btn btn-primary">Votar</button>
-                                </form>
-                                
+                                            <button type="submit" class="btn btn-primary">Votar</button>
+                                        </form>
+
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                @endif
-            @endforeach
-
-            <div class="col-4">
-                <div class="card border-primary" style="width: 18rem;">
-                    <img src="{{ asset('img/candidato1.jpg') }}" style="width: 18rem" class=""
-                        alt="..." s>
-                    <div class="card-body">
-                        
-
-                        <form action="{{ route('votico') }}" method="POST">
-                            @csrf
-                            <input type="hidden" class="form-control text-center" style="width: 50px"
-                                id="id" name="id" value="{{ $id }}">
-                            <input type="hidden" class="form-control text-center" style="width: 50px"
-                                id="candidato_id" name="candidato_id" value="{{ $item->id }}">
-                            <input type="hidden" class="form-control text-center" style="width: 50px"
-                                id="curso" name="curso" value="{{ $curso_id }}">
-
-                            <button type="submit" class="btn btn-primary">Votar</button>
-                        </form>
-                        
-                    </div>
+                        @endif
+                    @endforeach
                 </div>
             </div>
-            
+
+
         </div>
 
 
