@@ -9,15 +9,7 @@
 
 
 @section('content')
-    @if (session('mensaje'))
-        <div class="row">
-            <div class="col">
-                <div class="alert alert-success  alert-dismissible fade show" role="alert">
-                    <strong>¡Excelente!</strong> {{ session('mensaje') }}
-                </div>
-            </div>
-        </div>
-    @endif
+    
     @if (session('candidato'))
         <div class="row">
             <div class="col">
@@ -116,18 +108,20 @@
                                         @csrf
                                         <div class="col-md-6 mb-3">
                                             <label for="" class="form-label">Nombre</label>
-                                            <input type="text" class="form-control" id="nombre" name="nombre"
-                                                required>
+                                            <input type="text" class="form-control" id="nombre" name="nombre">
+                                            <p id="validar_nombre"></p>
                                         </div>
+
                                         <div class="col-md-6 mb-3">
                                             <label for="" class="form-label">Apellido</label>
-                                            <input type="text" class="form-control" id="apellido" name="apellido"
-                                                required>
+                                            <input type="text" class="form-control" id="apellido" name="apellido">
+                                            <p id="validar_apellido"></p>
                                         </div>
                                         <div class="col-6 mb-3">
                                             <label for="" class="form-label">Identificación</label>
                                             <input type="text" class="form-control" name="identificacion"
-                                                id="identificacion" placeholder="12345" required>
+                                                id="identificacion" placeholder="12345">
+                                            <p id="validar_identificacion"></p>
                                         </div>
 
                                         <div class="col-6 form-group mb-3">
@@ -138,9 +132,11 @@
                                                 <option value="0" id="curso" name="curso">Elije una opcion
                                                 </option>
                                                 @foreach ($lista_cursos as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->numero_curso }}</option>
+                                                    <option id="curso" name="curso" value="{{ $item->id }}">
+                                                        {{ $item->numero_curso }}</option>
                                                 @endforeach
                                             </select>
+                                            <p id="validar_curso"></p>
                                         </div>
                                         <div class="col-12 mb-3">
                                             <div class="form-check form-switch mb-3">
@@ -156,8 +152,6 @@
                                     </form>
                                 </div>
                             </div>
-
-
 
                         </div>
                         <!-- /.tab-pane -->
@@ -196,8 +190,107 @@
             )
         </script>
     @endif
+
+    @if (session('mensaje') == 'ok')
+        <script>
+            Swal.fire(
+                'Guardado!',
+                '¡El estudiante se guardó correctamente!',
+                'success'
+            )
+        </script>
+    @endif
+
     <script>
-        
+        $('.guardar_estudiante').submit(function(e) {
+            e.preventDefault();
+            let bool_nombre = true;
+            let bool_apellido = true;
+            let bool_identificacion = true;
+            let bool_curso = true;
+
+            //Mostrar text en el HTML
+            //document.getElementById("validar_nombre").innerHTML = "New text!";
+            mensaje_error_input = "El campo no debe estar vacio";
+            mensaje_valido = "Correcto";
+
+            //Validar input nombre
+            nombre = document.getElementById("nombre").value;
+            if (nombre == null || nombre.length == 0 || /^\s+$/.test(nombre)) {
+                document.getElementById("validar_nombre").innerHTML = mensaje_error_input;
+                document.getElementById("validar_nombre").style.color = "red";
+                bool_nombre = false;
+            } else {
+                document.getElementById("validar_nombre").innerHTML = mensaje_valido;
+                document.getElementById("validar_nombre").style.color = "green";
+                bool_nombre = true;
+            }
+
+            //Validar input apellido
+            apellido = document.getElementById("apellido").value;
+            if (apellido == null || apellido.length == 0 || /^\s+$/.test(apellido)) {
+                document.getElementById("validar_apellido").innerHTML = mensaje_error_input;
+                document.getElementById("validar_apellido").style.color = "red";
+                bool_apellido = false;
+            } else {
+                document.getElementById("validar_apellido").innerHTML = mensaje_valido;
+                document.getElementById("validar_apellido").style.color = "green";
+                bool_apellido = true;
+            }
+
+            identificacion = document.getElementById("identificacion").value;
+            mensaje_error = "Este campo debe ser numerico";
+            //En construcción
+            if (identificacion == null || identificacion.length == 0 || /^\s+$/.test(identificacion)) {
+                document.getElementById("validar_identificacion").innerHTML = mensaje_error;
+                document.getElementById("validar_identificacion").style.color = "red";
+                bool_identificacion = false;
+            } else
+            if (!(isNaN(identificacion))) {
+                document.getElementById("validar_identificacion").innerHTML = mensaje_valido;
+                document.getElementById("validar_identificacion").style.color = "green";
+                bool_identificacion = true;
+            } else {
+                document.getElementById("validar_identificacion").innerHTML = mensaje_error;
+                document.getElementById("validar_identificacion").style.color = "red";
+                bool_identificacion = false;
+            }
+
+
+            //Validar select
+            curso = document.getElementById("curso").selectedIndex;
+            mensaje_error = "Seleccione un curso";
+            if (curso == null || curso == 0) {
+                document.getElementById("validar_curso").innerHTML = mensaje_error;
+                document.getElementById("validar_curso").style.color = "red";
+                bool_curso = false;
+            } else {
+                document.getElementById("validar_curso").innerHTML = mensaje_valido;
+                document.getElementById("validar_curso").style.color = "green";
+                bool_curso = true;
+            }
+
+            if (bool_nombre == true && bool_apellido == true && bool_identificacion == true && bool_curso == true) {
+                Swal.fire({
+                    title: '¿Seguro deseas guardar?',
+                    text: "El estudiante se guardará en la base de datos",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Guardar!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        /* Swal.fire(
+                             'Deleted!',
+                             'Your file has been deleted.',
+                             'success'
+                         )*/
+                        this.submit();
+                    }
+                })
+            }
+        })
     </script>
 
 @stop

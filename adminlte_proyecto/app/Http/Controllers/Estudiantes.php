@@ -28,7 +28,7 @@ class Estudiantes extends Controller
         }
         $estudiante->voto = "no";
         $estudiante->save();
-        return redirect()->route('estudiante')->with('mensaje', 'Estudiante Guadado correctamente');
+        return redirect()->route('estudiante')->with('mensaje', 'ok');
     }
 
     public function todos(){

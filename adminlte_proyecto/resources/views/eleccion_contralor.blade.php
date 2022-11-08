@@ -24,7 +24,7 @@
                         @if ($item->cargos->nombre_cargo == 'Contraloria')
                             <div class="col-4">
                                 <div class="card border-primary" style="width: 18rem;">
-                                    <img src="{{ asset('img/candidato3.jpg') }}" style="width: 18rem" class=""
+                                    <img src="{{ asset('img/candidato3.jpg') }}" style="width: 10rem; border-radius: 25px;"  class="align-self-center mt-3"
                                         alt="..." s>
                                     <div class="card-body">
                                         <p class="card-text"><strong>Nombre: </strong>{{ $item->estudiantes->nombre }}
