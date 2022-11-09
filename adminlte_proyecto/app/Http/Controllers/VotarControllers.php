@@ -25,10 +25,10 @@ class VotarControllers extends Controller
             return redirect()->route('votar_estudiante')->with('mensaje', 'Esta indentificacion no esta registrada');
         }
 
-        $validar_voto = Estudiante::select(['voto'])->where('voto', 'si')->where('identificacion', $identificacion)->get();
+        /*$validar_voto = Estudiante::select(['voto'])->where('voto', 'si')->where('identificacion', $identificacion)->get();
         if( $validar_voto != '[]'){
             return redirect()->route('votar_estudiante')->with('mensaje', 'Ya se encuentra registrado su voto');
-        }
+        }*/
 
         $objestudiante = new Estudiantes;
         $estudiante = $objestudiante->estudiante($id); //Toda la informacion del estudiante

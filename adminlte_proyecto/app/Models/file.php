@@ -10,4 +10,9 @@ class file extends Model
     use HasFactory;
 
     protected $fillable = ['url'];
+
+    public function candidatos(){
+        return $this->belongsTo(Candidato::class, 'candidatos_id');
+    }
 }
+

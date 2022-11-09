@@ -7,6 +7,9 @@ use App\Models\Estudiante;
 use App\Models\Curso;
 use App\Models\Candidato;
 use App\Models\Cargo;
+use App\Models\file;
+
+use Illuminate\Support\Facades\Storage;
 
 class CandidatoController extends Controller
 {
@@ -67,6 +70,13 @@ class CandidatoController extends Controller
 
     public function inscribirCandidatoEstudiante(Request $request){
         //Asignar tarjeton
+        //return $request->all();
+        //return $request->input('file');
+        $request->validate([
+            'file' => 'image|max:5120'
+        ]);
+       
+        //return $request->file('file');
         $estudiante = new Estudiantes;
         $id = $request->input('id');
         $est = $estudiante->estudiante($request->input('id'));
@@ -84,6 +94,16 @@ class CandidatoController extends Controller
         $tarjeton = new TarjetonController;
         $tarjeton_id = $tarjeton->asignar_tarjeton($numero_grado, $cargo);
         $this->guardar_candidato($id, $cargo, $tarjeton_id);
+
+
+        if($request->file('file') != ""){
+            $imagen =  $request->file('file')->store('public/Img_Estudiantes');
+            $url = Storage::url($imagen);
+
+            $objimagen = new FileControllers;
+            $imagen = $objimagen->store_file($url, $id);
+        }
+        
         return redirect()->route('estudiante')->with('candidato_inscrito', 'ok');
     }
 

@@ -23,6 +23,10 @@ class Candidato extends Model
     }
 
     public function votos(){
-        return this->hasMany(VotoEstudiante::class, 'id');
+        return $this->hasMany(VotoEstudiante::class, 'id');
+    }
+
+    public function files(){
+        return $this->hasOne(file::class, 'id');
     }
 }

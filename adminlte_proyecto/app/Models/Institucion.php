@@ -10,6 +10,6 @@ class Institucion extends Model
     use HasFactory;
 
     public function grados(){
-        return this->hasMany(Grado::class, 'id');
+        return $this->hasMany(Grado::class, 'id');
     }
 }

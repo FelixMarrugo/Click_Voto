@@ -24,7 +24,7 @@
                             $item->cargos->nombre_cargo == 'Representante Estudiantil')
                             <div class="col-4">
                                 <div class="card border-primary" style="width: 18rem;">
-                                    <img src="{{ asset('img/candidato1.jpg') }}" style="width: 10rem; border-radius: 25px;"  class="align-self-center mt-3"
+                                    <img src="{{ asset($item->files->url) }}" style="width: 10rem; border-radius: 25px;"  class="align-self-center mt-3"
                                         alt="..." s>
                                     <div class="card-body">
                                         <p class="card-text"><strong>Nombre: </strong>{{ $item->estudiantes->nombre }}

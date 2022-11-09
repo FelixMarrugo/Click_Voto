@@ -16,15 +16,28 @@
                 <div class="row">
                     
                     <div class="col ">
-                        <div class="card card-primary card-outline" style=" margin: auto; width: 50%">
+                        <div class="card card-primary card-outline" style=" margin: auto; width: 60%">
                             <div class="card-body">
                                 <h3 class="text-center">
                                     Informacion del Candidato
                                 </h3>
+
                                 <form action="{{ route('CandidatoEstudiante') }}" class="row g-3  guardar"
-                                    style="margin-top: 25px" method="POST">
+                                    style="margin-top: 25px" method="POST" enctype="multipart/form-data">
                                     <!--Form-->
                                     @csrf
+                                    <div class="col-12 mb-3 text-center">
+                                        <p>FOTO</p>
+                                        <img src="{{ asset('img/candidato1.jpg') }}" style="width: 10rem; border-radius: 25px;"  class="align-self-center mt-3"
+                                        alt="..." s>
+                                    </div>
+                                    <div class="col-12 mb-3 mt-3 text-center">
+                                        <input type="file" name="file" id="file" accept="image/*">
+                                        @error('file')
+                                        <br>
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
                                     <div class="col-md-12 mb-3">
 
                                         <input type="hidden" class="form-control text-center" style="width: 50px"
