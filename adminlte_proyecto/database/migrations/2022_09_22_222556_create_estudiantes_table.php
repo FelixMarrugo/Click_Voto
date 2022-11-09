@@ -21,9 +21,12 @@ return new class extends Migration
             $table->unsignedBigInteger('cursos_id');
             $table->String('estado');
             $table->foreign('cursos_id')->references('id')->on('cursos');
-            $table->String('voto');
-            
+            $table->String('voto_representante')->nullable();
+            $table->String('voto_personeria')->nullable();
+            $table->String('voto_contraloria')->nullable();
             $table->timestamps();
+
+            
         });
     }
 

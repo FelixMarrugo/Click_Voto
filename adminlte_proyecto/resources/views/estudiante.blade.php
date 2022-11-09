@@ -9,7 +9,7 @@
 
 
 @section('content')
-    
+
     @if (session('candidato'))
         <div class="row">
             <div class="col">
@@ -198,6 +198,17 @@
                 '¡El estudiante se guardó correctamente!',
                 'success'
             )
+        </script>
+    @endif
+
+    @if (session('mensaje') == 'registrado')
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: '¡Este estudiante ya esta inscrito! verifique la identificación',
+                //footer: '<a href="">Why do I have this issue?</a>'
+            })
         </script>
     @endif
 
