@@ -9,6 +9,7 @@
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{asset('../css/elecciones.css')}}">
 </head>
 
 <body>
@@ -23,7 +24,7 @@
                         @if ($item->estudiantes->cursos->grados->numero_grado == $grado and
                             $item->cargos->nombre_cargo == 'Representante Estudiantil')
                             <div class="col-4">
-                                <div class="card border-primary" style="width: 18rem;">
+                                <div class="card border-primary shadow p-3 mb-5 bg-body rounded" style="width: 18rem;">
                                     <img src="{{ asset($item->files->url) }}" style="width: 10rem; border-radius: 25px;"  class="align-self-center mt-3"
                                         alt="..." s>
                                     <div class="card-body">

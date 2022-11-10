@@ -69,9 +69,8 @@ class CandidatoController extends Controller
     }
 
     public function inscribirCandidatoEstudiante(Request $request){
-        //Asignar tarjeton
-        //return $request->all();
-        //return $request->input('file');
+       
+        //Verificar si es una foto
         $request->validate([
             'file' => 'image|max:5120'
         ]);
@@ -79,6 +78,7 @@ class CandidatoController extends Controller
         //return $request->file('file');
         $estudiante = new Estudiantes;
         $id = $request->input('id');
+        //return $id;
         $est = $estudiante->estudiante($request->input('id'));
         $cargo = $request->get('cargo');
         $numero_grado = $est->cursos->grados->numero_grado;
@@ -97,11 +97,14 @@ class CandidatoController extends Controller
 
 
         if($request->file('file') != ""){
+            $candidato = $this->candidato_id($id);
+            $candidato_id = $candidato[0]['id'];
+
             $imagen =  $request->file('file')->store('public/Img_Estudiantes');
             $url = Storage::url($imagen);
 
             $objimagen = new FileControllers;
-            $imagen = $objimagen->store_file($url, $id);
+            $imagen = $objimagen->store_file($url, $candidato_id);
         }
         
         return redirect()->route('estudiante')->with('candidato_inscrito', 'ok');
@@ -129,5 +132,11 @@ class CandidatoController extends Controller
     public function getById($id){
         $candidato = Candidato::findOrFail($id);
         return $candidato;
+    }
+
+    public function candidato_id($estudiante_id)
+    {
+        $id = Candidato::select('id')->where('estudiante_id', $estudiante_id)->get();
+        return $id;
     }
 }
