@@ -13,6 +13,7 @@ class VotarControllers extends Controller
     }
 
     public function validar(Request $request){
+        //Validaciones 
         $identificacion = $request->input('identificacion');
         if (!is_numeric($identificacion)){
             return redirect()->route('votar_estudiante')->with('mensaje', 'La identificacion no es numerica');
@@ -25,10 +26,29 @@ class VotarControllers extends Controller
             return redirect()->route('votar_estudiante')->with('mensaje', 'Esta indentificacion no esta registrada');
         }
 
-        /*$validar_voto = Estudiante::select(['voto'])->where('voto', 'si')->where('identificacion', $identificacion)->get();
-        if( $validar_voto != '[]'){
+        $voto_representante = Estudiante::select(['voto_representante'])->where('voto_representante', 'si')->where('identificacion', $identificacion)->get();
+        $voto_personeria = Estudiante::select(['voto_personeria'])->where('voto_personeria', 'si')->where('identificacion', $identificacion)->get();
+        $voto_contraloria = Estudiante::select(['voto_contraloria'])->where('voto_contraloria', 'si')->where('identificacion', $identificacion)->get();
+        $vr = false;
+        $vp = false;
+        $vc = false;
+        if( $voto_representante != '[]'){
+            $vr = true;
+        } 
+
+        if ($voto_personeria != '[]') {
+            $vp = true;
+        }
+
+        if ($voto_contraloria != '[]') {
+            $vc = true;
+        }
+        if($vr == true && $vp == true && $vc == true){
             return redirect()->route('votar_estudiante')->with('mensaje', 'Ya se encuentra registrado su voto');
-        }*/
+        }
+       
+        //---------------------------------------------------------------------------
+
 
         $objestudiante = new Estudiantes;
         $estudiante = $objestudiante->estudiante($id); //Toda la informacion del estudiante
@@ -41,25 +61,64 @@ class VotarControllers extends Controller
         $objcandidatos = new CandidatoController;
         $candidatos = $objcandidatos->todos(); //Toda la info de los candidatos
         
-        return view('eleccion', compact('candidatos', 'grado', 'id', 'curso_id'));
+        $objfile = new FileControllers;
+        $info_file = $objfile->todos();
+        return view('eleccion', compact('candidatos', 'grado', 'id', 'curso_id', 'info_file'));
     }
 
     public function registrar_voto(Request $request){
         $id = $request->id; // id del votante
-        $candidato_id = $request->candidato_id;
+        $candidato_id = $request->candidato_id; //id del candidato
         $curso = $request->curso; //Curso del votante
-
-        $voto = new votosEstudiante;
-        $voto->candidatos_id = $candidato_id;
-        $voto->cursos_id = $curso;
-        $voto->save();
-
-        $estudiante = new Estudiantes;
-        $estudiante->voto($id);
 
         $objcandidatos = new CandidatoController;
         $candidatos = $objcandidatos->getById($candidato_id); 
         $cargo = $candidatos->cargos->nombre_cargo;
+
+        $estudiante = new Estudiantes;
+
+        $info_votante = $estudiante->estudiante($id);
+        $identificacion = $info_votante->identificacion;
+        //return $identificacion;
+        $voto_representante = Estudiante::select(['voto_representante'])->where('voto_representante', 'si')->where('identificacion', $identificacion)->get();
+        $voto_personeria = Estudiante::select(['voto_personeria'])->where('voto_personeria', 'si')->where('identificacion', $identificacion)->get();
+        $voto_contraloria = Estudiante::select(['voto_contraloria'])->where('voto_contraloria', 'si')->where('identificacion', $identificacion)->get();
+        $vr = false;
+        $vp = false;
+        $vc = false;
+
+        if( $voto_representante != '[]'){
+            $vr = true;
+        } 
+
+        if ($voto_personeria != '[]') {
+            $vp = true;
+        }
+
+        if ($voto_contraloria != '[]') {
+            $vc = true;
+        }
+
+
+        if($cargo == 'Representante Estudiantil' && $vr == false){
+            $this->voto_representante($id);
+            $voto = new votosEstudiante;
+            $voto->candidatos_id = $candidato_id;
+            $voto->cursos_id = $curso;
+            $voto->save();
+        } elseif ($cargo == 'Personeria' && $vp == false) {
+            $this->voto_personeria($id);
+            $voto = new votosEstudiante;
+            $voto->candidatos_id = $candidato_id;
+            $voto->cursos_id = $curso;
+            $voto->save();
+        }elseif($cargo == 'Contraloria' && $vc == false){
+            $this->voto_contraloria($id);
+            $voto = new votosEstudiante;
+            $voto->candidatos_id = $candidato_id;
+            $voto->cursos_id = $curso;
+            $voto->save();
+        }
 
         //Otra eleccion
         $objcandidatos = new CandidatoController;
@@ -70,14 +129,39 @@ class VotarControllers extends Controller
         $grado = $estudiante->cursos->grados->numero_grado; //este
         $curso_id = $estudiante->cursos->id; //este*/
         
+        $objfile = new FileControllers;
+        $info_file = $objfile->todos();
+
         if($cargo == 'Representante Estudiantil'){
-            return view('eleccion_personero', compact('candidatos', 'grado', 'id', 'curso_id'));
+            return view('eleccion_personero', compact('candidatos', 'grado', 'id', 'curso_id', 'info_file'));
         }elseif($cargo == 'Personeria'){
-            return view('eleccion_contralor', compact('candidatos', 'grado', 'id', 'curso_id')); 
+            return view('eleccion_contralor', compact('candidatos', 'grado', 'id', 'curso_id', 'info_file')); 
         }else{
+            return view('gracias');
             return view('votar');
         }
        
+    }
+
+    public function voto_representante($id)
+    {
+        $estudiante = Estudiante::FindOrFail($id);
+        $estudiante->voto_representante = "si";
+        $estudiante->save();
+    }
+
+    public function voto_personeria($id)
+    {
+        $estudiante = Estudiante::FindOrFail($id);
+        $estudiante->voto_personeria = "si";
+        $estudiante->save();
+    }
+
+    public function voto_contraloria($id)
+    {
+        $estudiante = Estudiante::FindOrFail($id);
+        $estudiante->voto_contraloria = "si";
+        $estudiante->save();
     }
 
 }

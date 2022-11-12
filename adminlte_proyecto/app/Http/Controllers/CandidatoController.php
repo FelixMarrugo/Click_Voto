@@ -94,15 +94,20 @@ class CandidatoController extends Controller
         $tarjeton = new TarjetonController;
         $tarjeton_id = $tarjeton->asignar_tarjeton($numero_grado, $cargo);
         $this->guardar_candidato($id, $cargo, $tarjeton_id);
-
+        $candidato = $this->candidato_id($id);
+        $candidato_id = $candidato[0]['id'];
 
         if($request->file('file') != ""){
-            $candidato = $this->candidato_id($id);
-            $candidato_id = $candidato[0]['id'];
+            
 
             $imagen =  $request->file('file')->store('public/Img_Estudiantes');
             $url = Storage::url($imagen);
 
+            $objimagen = new FileControllers;
+            //return gettype($url); //$url;
+            $imagen = $objimagen->store_file($url, $candidato_id);
+        }else{
+            $url = "/storage/Img_Estudiantes/sin_foto.jpg";
             $objimagen = new FileControllers;
             $imagen = $objimagen->store_file($url, $candidato_id);
         }

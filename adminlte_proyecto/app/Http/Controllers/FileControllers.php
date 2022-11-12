@@ -17,4 +17,11 @@ class FileControllers extends Controller
         $file->save();
         return true;
     }
+
+    public function todos()
+    {
+        $info_file = file::all();
+
+        return $info_file;
+    }
 }

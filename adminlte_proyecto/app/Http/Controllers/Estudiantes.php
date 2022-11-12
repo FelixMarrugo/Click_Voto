@@ -55,13 +55,6 @@ class Estudiantes extends Controller
         return $estudiante;
     }
 
-    public function voto($id)
-    {
-        // $estudiante = new Estudiante;
-        $estudiante = Estudiante::FindOrFail($id);
-        $estudiante->voto = "si";
-        $estudiante->save();
-    }
 
     public function identificacion_estudiante($identificacion)
     {
