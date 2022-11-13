@@ -1,9 +1,10 @@
-@extends('layouts.elecciones_layouts')
+@extends('layouts.gracias_layouts')
 
 @section('titulo', 'Gracias')
+
 @section('container')
     <div class="row justify-content-center">
-        <div class="card text-center" style="width: 50%; margin-top: 10%;">
+        <div class="card text-center" style="width: 50%; margin-top: 9%;">
             <div class="card-header">
                 <h1 class="display-6 text-center">Gracias por votar</h1>
             </div>

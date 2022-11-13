@@ -83,7 +83,7 @@ class CandidatoController extends Controller
         $cargo = $request->get('cargo');
         $numero_grado = $est->cursos->grados->numero_grado;
         $numero_curso = $est->cursos->numero_curso;
-
+        
         $info_candidatos = $this->todos();
         foreach ($info_candidatos as $value) {
             if($value->estudiantes->cursos->numero_curso == $numero_curso and $cargo == $value->cargo_id){

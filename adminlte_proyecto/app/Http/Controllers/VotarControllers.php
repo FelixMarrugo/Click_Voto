@@ -55,18 +55,25 @@ class VotarControllers extends Controller
         //que esta votando
 
         $curso_id = $estudiante->cursos->id; //Curso del votante
+        $grado = $estudiante->cursos->grados->numero_grado; //Grado del votante
+        $nombre = $estudiante->nombre." ".$estudiante->apellido;
 
-        $grado = $estudiante->cursos->grados->numero_grado;
+        
         
         $objcandidatos = new CandidatoController;
         $candidatos = $objcandidatos->todos(); //Toda la info de los candidatos
         
         $objfile = new FileControllers;
         $info_file = $objfile->todos();
-        return view('eleccion', compact('candidatos', 'grado', 'id', 'curso_id', 'info_file'));
+        return view('eleccion', compact('candidatos', 'grado', 'id', 'curso_id', 'info_file', 'nombre'));
     }
 
     public function registrar_voto(Request $request){
+        //Objeto del estudiante
+
+        $estudiante = new Estudiantes;
+
+
         $id = $request->id; // id del votante
         $candidato_id = $request->candidato_id; //id del candidato
         $curso = $request->curso; //Curso del votante
@@ -74,11 +81,11 @@ class VotarControllers extends Controller
         $objcandidatos = new CandidatoController;
         $candidatos = $objcandidatos->getById($candidato_id); 
         $cargo = $candidatos->cargos->nombre_cargo;
-
-        $estudiante = new Estudiantes;
-
+        
         $info_votante = $estudiante->estudiante($id);
         $identificacion = $info_votante->identificacion;
+        $nombre = $info_votante->nombre." ".$info_votante->apellido; // Nombre dek votante
+        //return $nombre;
         //return $identificacion;
         $voto_representante = Estudiante::select(['voto_representante'])->where('voto_representante', 'si')->where('identificacion', $identificacion)->get();
         $voto_personeria = Estudiante::select(['voto_personeria'])->where('voto_personeria', 'si')->where('identificacion', $identificacion)->get();
@@ -133,12 +140,12 @@ class VotarControllers extends Controller
         $info_file = $objfile->todos();
 
         if($cargo == 'Representante Estudiantil'){
-            return view('eleccion_personero', compact('candidatos', 'grado', 'id', 'curso_id', 'info_file'));
+            return view('eleccion_personero', compact('candidatos', 'grado', 'id', 'curso_id', 'info_file', 'nombre'));
         }elseif($cargo == 'Personeria'){
-            return view('eleccion_contralor', compact('candidatos', 'grado', 'id', 'curso_id', 'info_file')); 
+            return view('eleccion_contralor', compact('candidatos', 'grado', 'id', 'curso_id', 'info_file', 'nombre')); 
         }else{
             return view('gracias');
-            return view('votar');
+            //return view('votar');
         }
        
     }
