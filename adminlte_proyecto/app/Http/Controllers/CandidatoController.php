@@ -91,8 +91,10 @@ class CandidatoController extends Controller
             }
         }
 
+        //Se evidencia Fabricacion pura
         $tarjeton = new TarjetonController;
         $tarjeton_id = $tarjeton->asignar_tarjeton($numero_grado, $cargo);
+
         $this->guardar_candidato($id, $cargo, $tarjeton_id);
         $candidato = $this->candidato_id($id);
         $candidato_id = $candidato[0]['id'];

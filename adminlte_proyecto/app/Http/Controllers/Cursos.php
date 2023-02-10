@@ -19,4 +19,6 @@ class Cursos extends Controller
         $curso = $estudiante->cursos->numero_curso;
         return $curso;
     }
+
+    
 }

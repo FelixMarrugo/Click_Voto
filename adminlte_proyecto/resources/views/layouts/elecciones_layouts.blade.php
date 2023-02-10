@@ -123,7 +123,35 @@
                     <h1 class="text-center">@yield('cargo')</h1>
                 </div>
                 <div class="card-body">
-                    @yield('card_body')
+
+
+                    <div class="row">
+                        @yield('card_body')
+                        <div class="col">
+                            <div class="card border-primary shadow p-3 mb-5 bg-body rounded" style="width: 18rem;">
+
+
+                                <div class="card-body">
+                                    <p></p>
+
+                                    <form action="{{ route('votico') }}" method="POST" id="votar">
+                                        @csrf
+                                        <input type="hidden" class="form-control text-center" style="width: 50px"
+                                            id="nombre" name="nombre" value="Voto en blanco">
+                                        <input type="hidden" class="form-control text-center" style="width: 50px"
+                                            id="id" name="id" value="{{ $id }}">
+                                        <input type="hidden" class="form-control text-center" style="width: 50px"
+                                            id="candidato_id" name="candidato_id" value="{{ $item->id }}">
+                                        <input type="hidden" class="form-control text-center" style="width: 50px"
+                                            id="curso" name="curso" value="{{ $curso_id }}">
+                                        
+                                        <button type="submit" class="button">Voto en Blanco</button>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
                 </div>
@@ -189,7 +217,7 @@
                             }
                         })
 
-                    
+
                     }
                 })
             })

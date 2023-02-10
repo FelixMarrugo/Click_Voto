@@ -23,4 +23,10 @@ class Curso extends Model
         return this->hasMany(votoEstudiante::class, 'id');
     }
 
+    public function votos_blancos(){
+        return $this->hasMany(votos_blancos::class, 'id');
+    }
+
+    
+
 }

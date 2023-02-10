@@ -24,6 +24,7 @@ return new class extends Migration
             $table->String('voto_representante')->nullable();
             $table->String('voto_personeria')->nullable();
             $table->String('voto_contraloria')->nullable();
+
             $table->timestamps();
 
             
