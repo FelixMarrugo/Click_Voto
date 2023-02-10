@@ -10,11 +10,49 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <style>
-        img:hover {
-            border: 1px solid blue;
-
+        .css-button-arrow--blue {
+            min-width: 130px;
+            width: 100%;
+            height: 40px;
+            color: #fff;
+            padding: 5px 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline-block;
+            outline: none;
+            overflow: hidden;
+            border-radius: 5px;
+            border: none;
+            background-color: #3d348b
         }
 
+        .css-button-arrow--blue:hover {
+            border-radius: 5px;
+            padding-right: 24px;
+            padding-left: 8px;
+        }
+
+        .css-button-arrow--blue:hover:after {
+            opacity: 1;
+            right: 10px;
+        }
+
+        .css-button-arrow--blue:after {
+            content: "\00BB";
+            position: absolute;
+            opacity: 0;
+            font-size: 20px;
+            line-height: 40px;
+            top: 0;
+            right: -20px;
+            transition: 0.4s;
+        }
+
+        img:hover {
+            border: 1px solid blue;
+        }
         .button,
         .button::before,
         .button::after,
@@ -144,7 +182,7 @@
                                             id="candidato_id" name="candidato_id" value="{{ $item->id }}">
                                         <input type="hidden" class="form-control text-center" style="width: 50px"
                                             id="curso" name="curso" value="{{ $curso_id }}">
-                                        
+
                                         <button type="submit" class="button">Voto en Blanco</button>
                                     </form>
 

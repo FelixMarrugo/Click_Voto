@@ -43,7 +43,7 @@
                                 <input type="hidden" class="form-control text-center" style="width: 50px" id="curso"
                                     name="curso" value="{{ $curso_id }}">
 
-                                <button type="submit" class="button">Votar</button>
+                                <button type="submit" class="css-button-arrow--blue">Votar</button>
                             </form>
 
                         </div>
